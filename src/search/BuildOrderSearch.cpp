@@ -1,5 +1,7 @@
 #include "BuildOrderSearch.h"
 
+using namespace BOSS;
+
 void BuildOrderSearch::addGoal(const ActionType& a, const size_t& count)
 {
     m_goal.setGoal(a, count);

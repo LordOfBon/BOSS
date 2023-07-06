@@ -798,3 +798,31 @@ TEST_CASE("Unit Completion")
     state.addUnit(ActionType("Hatchery"));
     REQUIRE(state.getUnits()[0].getTimeUntilBuilt() == 0);
 }
+
+#include "search/AStarSearch.h"
+
+TEST_CASE("AStar")
+{
+    GameState state;
+    const static ActionType drone("Drone");
+    const static ActionType overlord("Overlord");
+    const static ActionType hatch("Hatchery");
+    state.addUnit(drone);
+    state.addUnit(drone);
+    state.addUnit(drone);
+    state.addUnit(drone);
+    state.addUnit(overlord);
+    state.addUnit(hatch);
+    state.setMinerals(50);
+
+    DistanceFunction h = [](GameState state, BuildOrderSearchGoal goal) -> int
+    {
+        return 
+    };
+    DistanceFunction g = [](GameState state, BuildOrderSearchGoal goal) -> int
+    {
+        return state.getCurrentFrame();
+    };
+
+    AStar algorithm();
+}

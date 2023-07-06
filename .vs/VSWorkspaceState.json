@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\bin",
-    "\\bin\\config",
-    "\\emscripten",
-    "\\src\\emscripten"
+    ""
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\BOSS.sln",
   "PreviewInSolutionExplorer": false
 }

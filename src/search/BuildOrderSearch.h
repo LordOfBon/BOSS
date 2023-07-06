@@ -4,32 +4,34 @@
 #include "BuildOrderSearchGoal.h"
 #include <Timer.hpp>
 
-using namespace BOSS;
-
-class BuildOrderSearch
+namespace BOSS
 {
-protected:
 
-    BuildOrderSearchGoal 			    m_goal;
+    class BuildOrderSearch
+    {
+    protected:
 
-    GameState					        m_initialState;
+        BuildOrderSearchGoal 			    m_goal;
 
-    int 							    m_searchTimeLimit = 0;
+        GameState					        m_initialState;
 
-    Timer							    m_searchTimer;
+        int 							    m_searchTimeLimit = 0;
 
-    BuildOrderSearchResults        m_results;
+        Timer							    m_searchTimer;
 
-    ActionSet findLooseDependancies() const;
+        BuildOrderSearchResults        m_results;
 
-public:
-    void addGoal(const ActionType& a, const size_t& count);
-    void setGoal(const BuildOrderSearchGoal& goal);
-    void setState(const GameState& state);
-    void clearGoalsAndResults();
-    void setTimeLimit(int n);
+        ActionSet findLooseDependancies() const;
 
-    virtual void search() = 0;
+    public:
+        void addGoal(const ActionType& a, const size_t& count);
+        void setGoal(const BuildOrderSearchGoal& goal);
+        void setState(const GameState& state);
+        void clearGoalsAndResults();
+        void setTimeLimit(int n);
 
-    const BuildOrderSearchResults& getResults() const;
-};
+        virtual void search() = 0;
+
+        const BuildOrderSearchResults& getResults() const;
+    };
+}

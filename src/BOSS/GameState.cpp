@@ -40,11 +40,6 @@ bool GameState::isLegal(const ActionType action) const
 {
     if (action.getRace() != m_race) { return false; }
 
-    if (action.getName() == "Lair")
-    {
-        int a = 7;
-    }
-
     static const ActionType larva("Larva");
     if (action == larva) { return false; }
 
@@ -156,6 +151,7 @@ void GameState::fastForward(const int toFrame)
         if (type.getRace() == Races::Terran && type.isBuilding() && !type.isAddon())
         {
             m_mineralWorkers++;
+            m_buildingWorkers--;
         }
 
         // register the action and remove it from the list
