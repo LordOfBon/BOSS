@@ -219,10 +219,8 @@ namespace ActionTypes
             pre.add(ActionTypes::GetRefinery(action.getRace()));
         }
 
-        for (size_t a(0); a < pre.size(); ++a)
-        {
-            const ActionType & actionType(a);
-            
+        for (ActionType& actionType : ActionTypes::allActionTypes)
+        {         
             if (pre.contains(actionType) && !allActions.contains(actionType))
             {
                 allActions.add(actionType);

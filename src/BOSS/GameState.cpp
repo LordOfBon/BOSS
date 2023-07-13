@@ -373,7 +373,7 @@ int GameState::whenResourcesReady(const ActionType action) const
             currentMineralWorkers++;
         }
         // finishing a refinery adjusts the worker count
-        else if (unit.getType().isRefinery())
+        if (unit.getType().isRefinery())
         {
             BOSS_ASSERT(currentMineralWorkers > WorkersPerRefinery, "Not enough mineral workers \n");
             currentMineralWorkers -= WorkersPerRefinery; 
@@ -449,7 +449,7 @@ int GameState::whenSupplyReady(const ActionType action) const
     for (size_t i(0); i < m_unitsBeingBuilt.size(); ++i)
     {
         const Unit & unit = getUnit(m_unitsBeingBuilt[m_unitsBeingBuilt.size() - 1 - i]);   
-        if (unit.getType().supplyProvided() > supplyNeeded)
+        if (unit.getType().supplyProvided() >= supplyNeeded)
         {
             return m_currentFrame + unit.getTimeUntilBuilt();
         }

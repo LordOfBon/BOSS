@@ -815,14 +815,38 @@ TEST_CASE("AStar")
     state.addUnit(hatch);
     state.setMinerals(50);
 
-    DistanceFunction h = [](GameState state, BuildOrderSearchGoal goal) -> int
+    DistanceFunction h = [](const GameState& state, const std::vector<ActionType>& buildOrder, const BuildOrderSearchGoal& goal) -> int
     {
-        return 
+        struct Node
+        {
+            int time;
+            ActionType type;
+        };
+        std::vector<Node> openList;
+
+        openList.push_back(Node{0, })
+
+        while (!openList.empty())
+        {
+            const Node n = openList.back();
+            openList.pop_back();
+
+            if(state.getNumTotal(n.type))
+        }
+
+        return 0;
     };
-    DistanceFunction g = [](GameState state, BuildOrderSearchGoal goal) -> int
+    DistanceFunction g = [](const GameState& state, const std::vector<ActionType>& buildOrder, const BuildOrderSearchGoal& goal) -> int
     {
         return state.getCurrentFrame();
     };
 
-    AStar algorithm();
+
+    AStar algorithm (h, g);
+    BuildOrderSearch* algo = (BuildOrderSearch*) & algorithm;
+    algo->setState(state);
+    algo->addGoal(ActionType("Hydralisk"), 1);
+    //algo->search();
+    //std::cout << algo->getResults().buildOrder.getNameString() << std::endl;
+
 }
