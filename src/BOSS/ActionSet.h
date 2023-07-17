@@ -25,6 +25,8 @@ public:
     void remove(const ActionSet & set);
     void clear();
 
+    const std::vector<ActionType>& contents() const;
+
     ActionType & operator[] (const size_t index);
     ActionType operator[] (const size_t index) const;
 

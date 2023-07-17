@@ -800,6 +800,7 @@ TEST_CASE("Unit Completion")
 }
 
 #include "search/AStarSearch.h"
+#include "search/Heuristics.h"
 
 TEST_CASE("AStar")
 {
@@ -815,38 +816,21 @@ TEST_CASE("AStar")
     state.addUnit(hatch);
     state.setMinerals(50);
 
-    DistanceFunction h = [](const GameState& state, const std::vector<ActionType>& buildOrder, const BuildOrderSearchGoal& goal) -> int
-    {
-        struct Node
-        {
-            int time;
-            ActionType type;
-        };
-        std::vector<Node> openList;
+    BuildOrderSearchGoal goal;
+    goal.setGoal(ActionType("Hydralisk"), 1);
+    goal.setGoal(ActionType("NydusCanal"), 1);
 
-        openList.push_back(Node{0, })
-
-        while (!openList.empty())
-        {
-            const Node n = openList.back();
-            openList.pop_back();
-
-            if(state.getNumTotal(n.type))
-        }
-
-        return 0;
-    };
+    DistanceFunction h = Heuristics::makeLandmarkHeuristic(goal);
     DistanceFunction g = [](const GameState& state, const std::vector<ActionType>& buildOrder, const BuildOrderSearchGoal& goal) -> int
     {
         return state.getCurrentFrame();
     };
 
 
-    AStar algorithm (h, g);
+    AStar algorithm (g, h);
     BuildOrderSearch* algo = (BuildOrderSearch*) & algorithm;
     algo->setState(state);
-    algo->addGoal(ActionType("Hydralisk"), 1);
-    //algo->search();
-    //std::cout << algo->getResults().buildOrder.getNameString() << std::endl;
-
+    algo->setGoal(goal);
+    algo->search();
+    std::cout << algo->getResults().buildOrder.getNameString() << std::endl;
 }

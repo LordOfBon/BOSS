@@ -54,6 +54,7 @@
     <ClCompile Include="..\src\search\DFBB_BuildOrderSearchResults.cpp" />
     <ClCompile Include="..\src\search\DFBB_BuildOrderSmartSearch.cpp" />
     <ClCompile Include="..\src\search\DFBB_BuildOrderStackSearch.cpp" />
+    <ClCompile Include="..\src\search\Heuristics.cpp" />
     <ClCompile Include="..\src\search\NaiveBuildOrderSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,7 @@
     <ClInclude Include="..\src\search\DFBB_BuildOrderSearchResults.h" />
     <ClInclude Include="..\src\search\DFBB_BuildOrderSmartSearch.h" />
     <ClInclude Include="..\src\search\DFBB_BuildOrderStackSearch.h" />
+    <ClInclude Include="..\src\search\Heuristics.h" />
     <ClInclude Include="..\src\search\NaiveBuildOrderSearch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

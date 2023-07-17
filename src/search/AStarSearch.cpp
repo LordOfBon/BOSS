@@ -12,6 +12,7 @@ void AStar::search()
         int g;
         int h;
         std::vector<ActionType> buildOrder;
+        ActionType action;
     };
     struct
     {
@@ -21,7 +22,7 @@ void AStar::search()
         }
     } compare;
     std::priority_queue openList(compare, std::vector<Node>());
-    openList.push(Node{ m_initialState, 0, 0, {} });
+    openList.push(Node{ m_initialState, 0, h(m_initialState, {}, m_goal), {}, ActionTypes::None});
 
     std::vector<ActionType> legal;
     auto dependancies = findLooseDependancies();
@@ -38,6 +39,11 @@ void AStar::search()
 
         Node current = openList.top();
         openList.pop();
+
+        if (current.action != ActionTypes::None)
+        {
+            current.state.doAction(current.action);
+        }
 
         // Completion condition
         if (m_goal.isAchievedBy(current.state))
@@ -58,16 +64,14 @@ void AStar::search()
             if (dependancies.contains(act) || act.isWorker() || act.isSupplyProvider() || act.isHatchery())
             {
                 Node child = current;
-                child.state.doAction(act);
                 child.buildOrder.push_back(act);
                 child.g = g(child.state, child.buildOrder, m_goal);
                 child.h = h(child.state, child.buildOrder, m_goal);
+                child.action = act;
                 openList.push(child);
             }
         }
         m_results.nodesExpanded++;
-
-
     }
     m_results.solved = !m_results.timedOut;
     m_results.timeElapsed = m_searchTimer.getElapsedTimeInMilliSec();

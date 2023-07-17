@@ -69,6 +69,11 @@ void ActionSet::clear()
     m_actions.clear();
 }
 
+const std::vector<ActionType>& BOSS::ActionSet::contents() const
+{
+    return m_actions;
+}
+
 ActionType & ActionSet::operator[] (const size_t index)
 {
     return m_actions[index];
