@@ -635,6 +635,7 @@ TEST_CASE("Gas legality")
         state.addUnit(ActionType("Drone"));
         state.addUnit(ActionType("Drone"));
         state.addUnit(ActionType("Drone"));
+        state.addUnit(ActionType("Drone"));
         state.addUnit(ActionType("Overlord"));
         state.addUnit(ActionType("Hatchery"));
         state.addUnit(ActionType("SpawningPool"));
@@ -703,6 +704,9 @@ TEST_CASE("Larva FF")
     state.addUnit(hatch);
     state.addUnit(hatch);
     state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Overlord"));
     state.setMinerals(2000000);
     
     REQUIRE(testFF(state, { "Overlord", "Drone", "Drone", "Overlord", "Hatchery", "Drone", "Extractor", "Hatchery", }));
@@ -817,8 +821,7 @@ TEST_CASE("AStar")
     state.setMinerals(50);
 
     BuildOrderSearchGoal goal;
-    goal.setGoal(ActionType("Hydralisk"), 1);
-    goal.setGoal(ActionType("NydusCanal"), 1);
+    goal.setGoal(ActionType("Lurker"), 1);
 
     DistanceFunction h = Heuristics::makeLandmarkHeuristic(goal);
     DistanceFunction g = [](const GameState& state, const std::vector<ActionType>& buildOrder, const BuildOrderSearchGoal& goal) -> int

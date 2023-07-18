@@ -60,6 +60,8 @@ void AStar::search()
         current.state.getLegalActions(legal);
         for (auto& act : legal)
         {
+            // Refineries shouldn't be built unless there are a good number of workers
+            if (act.isRefinery() && current.state.getNumMineralWorkers() < 6) { continue; }
             // Domain specific pruning; all other actions cannot improve build order
             if (dependancies.contains(act) || act.isWorker() || act.isSupplyProvider() || act.isHatchery())
             {

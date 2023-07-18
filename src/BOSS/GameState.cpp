@@ -53,7 +53,8 @@ bool GameState::isLegal(const ActionType action) const
 
     // check to see if we will ever have enough resources to build this thing
     if ((m_minerals < action.mineralPrice()) && (mineralWorkers == 0)) { return false; }
-    // TODO: do we want to check if we won't have enough workers for the extractor?
+    
+    //if (action.isRefinery() && mineralWorkers < WorkersPerRefinery + 1 + action.isMorphed()) { return false; }
     
     if ((m_gas < action.gasPrice()) && (m_gasWorkers == 0) && (numRefineries == 0)) { return false; }
         	
@@ -442,14 +443,15 @@ int GameState::whenBuilderReady(const ActionType action) const
 
 int GameState::whenSupplyReady(const ActionType action) const
 {
-    int supplyNeeded = action.supplyCost() + m_currentSupply - m_maxSupply;
+    int supplyNeeded = action.supplyCost() + m_currentSupply - m_maxSupply - (action.whatBuilds().supplyCost() * action.isMorphed());
     if (supplyNeeded <= 0) { return m_currentFrame; }
 
     // search the actions in progress in reverse for the first supply provider
     for (size_t i(0); i < m_unitsBeingBuilt.size(); ++i)
     {
         const Unit & unit = getUnit(m_unitsBeingBuilt[m_unitsBeingBuilt.size() - 1 - i]);   
-        if (unit.getType().supplyProvided() >= supplyNeeded)
+        supplyNeeded -= unit.getType().supplyProvided();
+        if (supplyNeeded <= 0)
         {
             return m_currentFrame + unit.getTimeUntilBuilt();
         }
