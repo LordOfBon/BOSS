@@ -86,14 +86,11 @@ DistanceFunction Heuristics::makeLandmarkHeuristic(const BuildOrderSearchGoal& g
 
     for (size_t i = 0; i < paths.size(); ++i)
     {
-        //std::cout << "Path " << i << ": ";
         for (auto& act : paths[i])
         {
             graph[act].paths.push_back({ i, pathLengths[i] });
             pathLengths[i] += act.buildTime();
-            //std::cout << act.getName() << " ";
         }
-        //std::cout << std::endl;
     }
 
     // Construct heuristic

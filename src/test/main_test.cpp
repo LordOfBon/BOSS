@@ -803,6 +803,23 @@ TEST_CASE("Unit Completion")
     REQUIRE(state.getUnits()[0].getTimeUntilBuilt() == 0);
 }
 
+#include "search/MacroAction.h"
+TEST_CASE("Macro Actions")
+{
+    MacroAction x({ActionType("Drone"), ActionType("Drone")});
+    MacroAction y(ActionType("Drone"), 2);
+    REQUIRE(x == y);
+    std::set<MacroAction> test; // this is to make sure the ordering is properly defined
+    test.emplace(x);
+    REQUIRE(test.contains(y));
+    MacroAction u(ActionType("Nexus"), 22);
+    test.emplace(u);
+    REQUIRE(test.size()==2);
+
+
+}
+
+#ifdef ASTARTEST
 #include "search/AStarSearch.h"
 #include "search/Heuristics.h"
 
@@ -830,10 +847,39 @@ TEST_CASE("AStar")
     };
 
 
-    AStar algorithm (g, h);
-    BuildOrderSearch* algo = (BuildOrderSearch*) & algorithm;
+    AStar algorithm(g, h);
+    BuildOrderSearch* algo = (BuildOrderSearch*)&algorithm;
     algo->setState(state);
     algo->setGoal(goal);
     algo->search();
     std::cout << algo->getResults().buildOrder.getNameString() << std::endl;
 }
+#endif // ASTARTEST
+
+#define MacroFrequencyTEST
+#ifdef MacroFrequencyTEST
+#include "search/MacroFrequencyDFBB.h"
+TEST_CASE("Macro Frequency Search")
+{
+    MacroData data;
+    data.init("config/FrequencyData.json");
+
+    MacroFrequencyDFBB macroAlgo(&data);
+    auto algoP = (BuildOrderSearch*) & macroAlgo;
+    algoP->addGoal(ActionType("Lurker"), 2);
+
+    GameState state;
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Drone"));
+    state.addUnit(ActionType("Overlord"));
+    state.addUnit(ActionType("Hatchery"));
+    state.setMinerals(50);
+    algoP->setState(state);
+
+    algoP->search();
+
+    std::cout << algoP->getResults().buildOrder.getNameString() << std::endl;
+}
+#endif // MacroFrequencyTEST

@@ -1,4 +1,5 @@
 #include "BuildOrderSearch.h"
+#include <queue>
 
 using namespace BOSS;
 
