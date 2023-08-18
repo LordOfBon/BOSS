@@ -383,6 +383,7 @@ void Tools::CalculatePrerequisitesRequiredToBuild(const GameState & state, const
 
     for (size_t n(0); n<allNeeded.size(); ++n)
     {
+        const static ActionType larva("Larva");
         const ActionType & neededType = allNeeded[n];
 
         // if we already have the needed type completed we can skip it
@@ -396,7 +397,7 @@ void Tools::CalculatePrerequisitesRequiredToBuild(const GameState & state, const
             //added.add(neededType);
         }
         // otherwise we need to recurse on the needed type to build its prerequisites
-        else
+        else if (neededType != larva)
         {
             added.add(neededType);
             CalculatePrerequisitesRequiredToBuild(state, neededType.getPrerequisiteActionCount(), added);
@@ -448,7 +449,7 @@ int Tools::GetBuildOrderCompletionTime(const GameState & state, const BuildOrder
 {
     GameState stateCopy(state);
     DoBuildOrder(stateCopy, buildOrder);
-    return stateCopy.getLastActionFinishTime();
+    return stateCopy.getCurrentFrame() + stateCopy.getLastActionFinishTime();
 }
 
 void Tools::DoBuildOrder(GameState & state, const BuildOrder & buildOrder)

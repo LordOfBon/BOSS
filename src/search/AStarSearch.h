@@ -1,9 +1,9 @@
 #pragma once
 
 #include "BuildOrderSearch.h"
+#include "Heuristics.h"
 namespace BOSS
 {
-    typedef std::function<int(const GameState&, const std::vector<ActionType>&, const BuildOrderSearchGoal&)> DistanceFunction;
 
         class AStar : BuildOrderSearch
     {

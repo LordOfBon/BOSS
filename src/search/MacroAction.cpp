@@ -38,6 +38,22 @@ namespace BOSS
         }
     }
 
+    std::string MacroAction::toString()
+    {
+        std::stringstream str;
+        str << "[";
+        for (int i(0); i < actions.size(); ++i)
+        {
+            str << actions[i].getName();
+            if (i != actions.size() - 1)
+            {
+                str << ", ";
+            }
+        }
+        str << "]";
+        return str.str();
+    }
+
 
     int MacroData::getFrequency(ActionType& action, int frame)
     {

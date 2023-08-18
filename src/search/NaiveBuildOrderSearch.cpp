@@ -74,12 +74,9 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
 
     // Add the required units to a preliminary build order
     BuildOrder buildOrder;
-    for (size_t a(0); a < requiredToBuild.size(); ++a)
+    for (auto& a : requiredToBuild.contents())
     {
-        if (requiredToBuild.contains(a))
-        {
-            buildOrder.add(ActionType(a));
-        }
+         buildOrder.add(ActionType(a));
     }
 
     // Add some workers to the build order if we don't have many, this usually gives a lower upper bound
@@ -89,11 +86,14 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
     // Add the goal units to the end of the build order 
     for (const ActionType & actionType : ActionTypes::GetAllActionTypes())
     {
-        int need = (int)m_goal.getGoal(actionType);
-        int have = (int)m_state.getNumTotal(actionType);
-        int numNeeded = need - have - buildOrder.getTypeCount(actionType);
-         
-        buildOrder.add(actionType, numNeeded);
+        if (actionType.getRace() == m_state.getRace())
+        {
+            int need = (int)m_goal.getGoal(actionType);
+            int have = (int)m_state.getNumTotal(actionType);
+            int numNeeded = need - have - buildOrder.getTypeCount(actionType);
+
+            buildOrder.add(actionType, numNeeded);
+        }
     }
 
     // if we are zerg, make sure we have enough morphers for morphed units
@@ -107,7 +107,7 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
             {
                 const ActionType & type(i);
 
-                if (type.isMorphed())
+                if (type.isMorphed() && m_state.getRace() == type.getRace())
                 {
                     const ActionType & morpher = type.whatBuilds();
 
@@ -186,12 +186,17 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
 
     workersNeeded = std::max(workersNeeded, gasWorkersNeeded);
 
+    if (gasWorkersNeeded > 0)
+    {
+        workersNeeded += 2;
+    }
+
     // special case for zerg: buildings consume drones
     if (m_state.getRace() == Races::Zerg)
     {
         for (const ActionType & type : ActionTypes::GetAllActionTypes())
         {
-            if (type.whatBuilds().isWorker() && !type.isMorphed())
+            if (type.whatBuilds().isWorker() && type.isMorphed() && type.getRace() == m_state.getRace())
             {
                 workersNeeded += buildOrder.getTypeCount(type);
             }
@@ -257,7 +262,7 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
 
 		// insert 1 or more supply providers if needed
         // TODO: don't go over 200 supply
-		while (!nextAction.isMorphed() && !nextAction.isSupplyProvider() && (nextAction.supplyCost() > (maxSupply + supplyInProgress - currentSupply)))
+		while (!nextAction.isSupplyProvider() && (nextAction.supplyCost() > (maxSupply + supplyInProgress - currentSupply)))
 		{
 			BOSS_ASSERT(m_state.isLegal(supplyProvider), "Should be able to build more supply here. Max: %d", maxSupply);
 			finalBuildOrder.add(supplyProvider);

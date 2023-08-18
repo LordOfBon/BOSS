@@ -2,7 +2,7 @@
 
 #include "Common.h"
 #include "GameState.h"
-#include "BuildOrderSearchGoal.h"
+#include "search/BuildOrderSearchGoal.h"
 #include "BuildOrder.h"
 #include "ActionSet.h"
 

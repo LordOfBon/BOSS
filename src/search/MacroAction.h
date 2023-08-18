@@ -15,12 +15,13 @@ namespace BOSS
 
         bool isLegal(GameState state);
         void doMacro(GameState& state);
+        std::string toString();
     };
 
     class MacroData
     {
         int binSize;
-        std::map<ActionType, std::vector<int>> frequencies;
+        std::map<ActionType, std::vector<float>> frequencies;
 
         // Vector 1: race
         // Vector 2: time bins
@@ -32,5 +33,13 @@ namespace BOSS
     public:
         void init(const std::string& filename);
         std::vector<MacroAction> macrosToSearch(GameState& state);
+        const float getFrequency(ActionType act, int frame) const
+        {
+            if (!frequencies.contains(act)) { return 0; }
+            auto& bins = frequencies.at(act);
+            int index = frame / binSize;
+            if (index > bins.size()) { return 0; }
+            return bins[index];
+        }
     };
 }

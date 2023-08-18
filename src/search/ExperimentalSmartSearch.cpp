@@ -1,15 +1,16 @@
-#include "DFBB_BuildOrderSmartSearch.h"
+#include "ExperimentalSmartSearch.h"
 #include "ActionSet.h"
 
 using namespace BOSS;
 
-DFBB_BuildOrderSmartSearch::DFBB_BuildOrderSmartSearch() 
-    : m_stackSearch(m_params)
+ExperimentalSmartSearch::ExperimentalSmartSearch(const ChildSort & sort)
+    : m_stackSearch(m_params, sort)
     , m_searchTimeLimit(30)
+    , sort(sort)
 {
 }
 
-void DFBB_BuildOrderSmartSearch::doSearch()
+void ExperimentalSmartSearch::doSearch()
 {
     BOSS_ASSERT(m_initialState.getRace() != Races::None, "Must set initial state before performing search");
 
@@ -24,16 +25,17 @@ void DFBB_BuildOrderSmartSearch::doSearch()
         calculateSearchSettings();
         m_params.m_goal                     = m_goal;
         m_params.m_initialState             = m_initialState;
-        m_params.m_useRepetitions 			= true;
-        m_params.m_useIncreasingRepetitions = true;
-        m_params.m_useAlwaysMakeWorkers 	= true;
-        m_params.m_useSupplyBounding 		= true;
-        m_params.m_supplyBoundingThreshold  = 1.5;
         m_params.m_relevantActions          = m_relevantActions;
         m_params.m_searchTimeLimit          = m_searchTimeLimit;
+        m_params.m_useSupplyBounding        = false;
+        m_params.m_useAlwaysMakeWorkers     = false;
+        m_params.m_useIncreasingRepetitions = false;
+        m_params.m_useLandmarkLowerBoundHeuristic = false;
+        m_params.m_useRepetitions = false;
+        m_params.m_useResourceLowerBoundHeuristic = false;
 
         //BWAPI::Broodwar->printf("Constructing new search object time limit is %lf", _params.searchTimeLimit);
-        m_stackSearch = DFBB_BuildOrderStackSearch(m_params);
+        m_stackSearch = ExperimentalStackSearch(m_params, sort);
         m_stackSearch.search();
     }
 
@@ -45,7 +47,7 @@ void DFBB_BuildOrderSmartSearch::doSearch()
     }
 }
 
-void DFBB_BuildOrderSmartSearch::calculateSearchSettings()
+void ExperimentalSmartSearch::calculateSearchSettings()
 {
     // set the max number of resource depots to what we have since no expanding is allowed
     const ActionType & resourceDepot    = ActionTypes::GetResourceDepot(getRace());
@@ -70,9 +72,6 @@ void DFBB_BuildOrderSmartSearch::calculateSearchSettings()
     // set relevant actions
     setRelevantActions();
 
-    // set the repetitions
-    setRepetitions();
-
     size_t maxWorkers = 45;
     if (m_goal.getGoal(worker) > maxWorkers)
     {
@@ -86,7 +85,7 @@ void DFBB_BuildOrderSmartSearch::calculateSearchSettings()
 }
 
 // calculates maximum number of refineries we'll need
-size_t DFBB_BuildOrderSmartSearch::calculateRefineriesRequired()
+size_t ExperimentalSmartSearch::calculateRefineriesRequired()
 {
     const ActionType & refinery      = ActionTypes::GetRefinery(getRace());
     const ActionType & resourceDepot = ActionTypes::GetResourceDepot(getRace());
@@ -111,7 +110,7 @@ size_t DFBB_BuildOrderSmartSearch::calculateRefineriesRequired()
 }
 
 // handles all goalMax calculations for prerequisites of goal actions
-void DFBB_BuildOrderSmartSearch::setPrerequisiteGoalMax()
+void ExperimentalSmartSearch::setPrerequisiteGoalMax()
 {
     if (getRace() == Races::Protoss || getRace() == Races::Terran)
     {
@@ -186,7 +185,7 @@ void DFBB_BuildOrderSmartSearch::setPrerequisiteGoalMax()
 }
 
 // recursively checks the tech tree of Action and sets each to have goalMax of 1
-void DFBB_BuildOrderSmartSearch::recurseOverStrictDependencies(const ActionType & actionType)
+void ExperimentalSmartSearch::recurseOverStrictDependencies(const ActionType & actionType)
 {
     if (actionType.isDepot() || actionType.isWorker() || actionType.isSupplyProvider() || actionType.isRefinery())
     {
@@ -208,7 +207,7 @@ void DFBB_BuildOrderSmartSearch::recurseOverStrictDependencies(const ActionType 
     }
 }
 
-void DFBB_BuildOrderSmartSearch::setRelevantActions()
+void ExperimentalSmartSearch::setRelevantActions()
 {
     m_relevantActions.clear();
     for (const ActionType & actionType : ActionTypes::GetAllActionTypes())
@@ -220,7 +219,7 @@ void DFBB_BuildOrderSmartSearch::setRelevantActions()
     }
 }
 
-size_t DFBB_BuildOrderSmartSearch::calculateSupplyProvidersRequired()
+size_t ExperimentalSmartSearch::calculateSupplyProvidersRequired()
 {
     const ActionType & resourceDepot    = ActionTypes::GetResourceDepot(getRace());
     const ActionType & worker           = ActionTypes::GetWorker(getRace());
@@ -246,7 +245,7 @@ size_t DFBB_BuildOrderSmartSearch::calculateSupplyProvidersRequired()
     return supplyNeeded > 0 ? (size_t)std::ceil((double)supplyNeeded / (double)supplyProvider.supplyProvided()) : 0;
 }
 
-void DFBB_BuildOrderSmartSearch::setRepetitions()
+void ExperimentalSmartSearch::setRepetitions()
 {
     //const ActionType & resourceDepot    = ActionTypes::GetResourceDepot(getRace());
     //const ActionType & refinery         = ActionTypes::GetRefinery(getRace());
@@ -270,38 +269,43 @@ void DFBB_BuildOrderSmartSearch::setRepetitions()
     }
 }
 
-void DFBB_BuildOrderSmartSearch::addGoal(const ActionType & a, const size_t & count)
+void ExperimentalSmartSearch::addGoal(const ActionType & a, const size_t & count)
 {
     m_goal.setGoal(a,count);
 }
 
-void DFBB_BuildOrderSmartSearch::setGoal(const BuildOrderSearchGoal & g)
+void ExperimentalSmartSearch::setGoal(const BuildOrderSearchGoal & g)
 {
     m_goal = g;    
 }
 
-void DFBB_BuildOrderSmartSearch::setState(const GameState & state)
+void ExperimentalSmartSearch::setState(const GameState & state)
 {
     m_initialState = state;
 }
 
 
-void DFBB_BuildOrderSmartSearch::setTimeLimit(int n)
+void ExperimentalSmartSearch::setTimeLimit(int n)
 {
     m_searchTimeLimit = n;
 }
 
-void DFBB_BuildOrderSmartSearch::search()
+void BOSS::ExperimentalSmartSearch::setSortFunction(const ChildSort& sort)
+{
+    this->sort = sort;
+}
+
+void ExperimentalSmartSearch::search()
 {
     doSearch();
 }
 
-const DFBB_BuildOrderSearchResults & DFBB_BuildOrderSmartSearch::getResults() const
+const DFBB_BuildOrderSearchResults & ExperimentalSmartSearch::getResults() const
 {
     return m_results;
 }
 
-const DFBB_BuildOrderSearchParameters & DFBB_BuildOrderSmartSearch::getParameters()
+const DFBB_BuildOrderSearchParameters & ExperimentalSmartSearch::getParameters()
 {
     calculateSearchSettings();
 
@@ -315,13 +319,13 @@ const DFBB_BuildOrderSearchParameters & DFBB_BuildOrderSmartSearch::getParameter
     return m_params;
 }
 
-void DFBB_BuildOrderSmartSearch::print()
+void ExperimentalSmartSearch::print()
 {
     //initialState.printData();
     printf("\n\n");
 }
 
-const RaceID DFBB_BuildOrderSmartSearch::getRace() const
+const RaceID ExperimentalSmartSearch::getRace() const
 {
     return m_initialState.getRace();
 }

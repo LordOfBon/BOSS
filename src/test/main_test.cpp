@@ -856,17 +856,24 @@ TEST_CASE("AStar")
 }
 #endif // ASTARTEST
 
-#define MacroFrequencyTEST
+//#define MacroFrequencyTEST
 #ifdef MacroFrequencyTEST
 #include "search/MacroFrequencyDFBB.h"
+#include "search/Heuristics.h"
+#include "search/AStarSearch.h"
+#include "search/NaiveBuildOrderSearch.h"
+#include "search/DFBB_BuildOrderSmartSearch.h"
+#include "search/DFBB_BuildOrderExperimentalSearch.h"
 TEST_CASE("Macro Frequency Search")
 {
-    MacroData data;
-    data.init("config/FrequencyData.json");
+    /*MacroData data;
+    data.init("config/FrequencyData.json");*/
+    BuildOrderSearchGoal goal;
+    goal.setGoal(ActionType("Lurker"), 2);
 
-    MacroFrequencyDFBB macroAlgo(&data);
-    auto algoP = (BuildOrderSearch*) & macroAlgo;
-    algoP->addGoal(ActionType("Lurker"), 2);
+    AStar search1(Heuristics::currentFrameHeuristic, Heuristics::makeLandmarkHeuristic(goal));
+    auto algoP = (BuildOrderSearch*) &search1;
+    algoP->setGoal(goal);
 
     GameState state;
     state.addUnit(ActionType("Drone"));
@@ -878,8 +885,69 @@ TEST_CASE("Macro Frequency Search")
     state.setMinerals(50);
     algoP->setState(state);
 
+    std::cout << "AStar: " << std::endl;
     algoP->search();
-
+    auto time = algoP->getResults().timeElapsed;
     std::cout << algoP->getResults().buildOrder.getNameString() << std::endl;
+    std::cout << Tools::GetBuildOrderCompletionTime(state, algoP->getResults().buildOrder) << " calculation time: "  << time << std::endl;
+
+
+    std::cout << "\nNaive: " << std::endl;
+    NaiveBuildOrderSearch search2(state, goal);
+    auto x = search2.solve();
+    std::cout << x.getNameString() << std::endl;
+    std::cout << Tools::GetBuildOrderCompletionTime(state, x) << std::endl;
+
+    std::cout << "\nMacroFrequency: " << std::endl;
+    MacroData data;
+    data.init("config/FrequencyData.json");
+
+    MacroFrequencyDFBB search3(&data);
+    auto algo3 = (BuildOrderSearch*)&search3;
+    algo3->setState(state);
+    algo3->setTimeLimit(time);
+    algo3->setGoal(goal);
+    algo3->search();
+    std::cout << algo3->getResults().buildOrder.getNameString() << std::endl;
+    std::cout << Tools::GetBuildOrderCompletionTime(state, algo3->getResults().buildOrder) << " calculation time: " << algo3->getResults().timeElapsed <<  std::endl;
+
+    std::cout << "\nDFBB_Smart: " << std::endl;
+    DFBB_BuildOrderSmartSearch search4;
+    search4.setGoal(goal);
+    search4.setState(state);
+    search4.setTimeLimit(time);
+    search4.search();
+    std::cout << search4.getResults().buildOrder.getNameString() << std::endl;
+    std::cout << Tools::GetBuildOrderCompletionTime(state, search4.getResults().buildOrder) << " calculation time: " << search4.getResults().timeElapsed << std::endl;
+
+    std::cout << "\nDFBB_Experimental: " << std::endl;
+    DFBB_BuildOrderExperimentalSearch search5;
+    search5.setGoal(goal);
+    search5.setState(state);
+    search5.setTimeLimit(time);
+    search5.search();
+    std::cout << search5.getResults().buildOrder.getNameString() << std::endl;
+    std::cout << Tools::GetBuildOrderCompletionTime(state, search5.getResults().buildOrder) << " calculation time: " << search5.getResults().timeElapsed << std::endl;
 }
 #endif // MacroFrequencyTEST
+
+#define DFBBOrderingTests
+#ifdef DFBBOrderingTests
+#include "search/DFBB_OrderingExperiments.h"
+TEST_CASE("DFBB Ordering Tests")
+{
+    BOSS::GameState state;
+    state.addUnit(ActionType("CommandCenter"));
+    state.addUnit(ActionType("SCV"));
+    state.addUnit(ActionType("SCV"));
+    state.addUnit(ActionType("SCV"));
+    state.addUnit(ActionType("SCV"));
+    state.setMinerals(50);
+
+    BuildOrderSearchGoal goal;
+    goal.setGoal(ActionType("Marine"), 4);
+    
+    runDFBBExperiments(state, goal, "DFBBTEST_Marine.txt", 10);
+}
+#endif // DFBB Ordering Tests
+

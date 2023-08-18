@@ -14,9 +14,41 @@ void BOSS::MacroFrequencyDFBB::search()
     std::stack<Node> openList;
     openList.push(Node{ m_initialState, {} });
 
+    auto dependencies = findLooseDependancies();
+    auto filter = [&dependencies](MacroAction& macro, GameState& state) -> bool
+    {
+        const ActionType refinery = ActionTypes::GetRefinery(state.getRace());
+        int workers = state.getNumMineralWorkers() - 3 * state.getNumInProgress(refinery);
+        for (auto& act : macro.actions)
+        {
+            if (!dependencies.contains(act) && !(act.isWorker() || act.isSupplyProvider() || act.isDepot()))
+            {
+                return true;
+            }
+            workers += act.isWorker() - (act.isMorphed() && act.whatBuilds().isWorker());
+            if (act.isRefinery())
+            {
+                if (workers < 6)
+                {
+                    return true;
+                }
+                else
+                {
+                    if (state.getNumInProgress(refinery) > 1)
+                    {
+                        return true;
+                    }
+                    workers -= 3;
+                }
+            }
+        }
+        return false;
+    };
+
     std::vector<MacroAction> bestBuildOrder;
     int bestTime;
     std::tie(bestBuildOrder, bestTime) = getUpperBound();
+    int initialTime = bestTime;
 
     while (true)
     {
@@ -35,7 +67,7 @@ void BOSS::MacroFrequencyDFBB::search()
             current.buildOrder.back().doMacro(current.state);
         }
 
-        if (current.state.getCurrentFrame() >= bestTime)
+        if (current.state.getCurrentFrame() + current.state.getLastActionFinishTime() >= bestTime)
         {
             continue;
         }
@@ -45,12 +77,15 @@ void BOSS::MacroFrequencyDFBB::search()
         {
             bestBuildOrder = current.buildOrder;
             bestTime = current.state.getCurrentFrame();
+            std::cout << bestTime << std::endl;
         }
 
         // expand node
         auto macros = data->macrosToSearch(current.state);
-        for (auto& macro : macros)
+        for (auto iter = macros.rbegin(); iter != macros.rend(); ++iter)
         {
+            auto& macro = *iter;
+            if (filter(macro, current.state)) { continue; }
             Node child = current;
             child.buildOrder.push_back(macro);
             openList.push(child);
@@ -65,7 +100,7 @@ void BOSS::MacroFrequencyDFBB::search()
             m_results.buildOrder.add(act);
         }
     }
-
+    surpassedNaive = initialTime != bestTime;
     m_results.timeElapsed = m_searchTimer.getElapsedTimeInMilliSec();
 }
 
@@ -80,5 +115,5 @@ std::pair<std::vector<BOSS::MacroAction>, int> BOSS::MacroFrequencyDFBB::getUppe
         state.doAction(naiveBuildOrder[i]);
         bOrder.push_back(MacroAction({ naiveBuildOrder[i] }));
     }
-    return std::pair<std::vector<MacroAction>, int>(bOrder, state.getCurrentFrame());
+    return std::pair<std::vector<MacroAction>, int>(bOrder, state.getCurrentFrame() + state.getLastActionFinishTime());
 }

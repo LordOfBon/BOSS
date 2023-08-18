@@ -1,26 +1,27 @@
-#include "DFBB_BuildOrderStackSearch.h"
+#include "ExperimentalStackSearch.h"
 #include "Tools.h"
 #include "ActionSet.h"
 
 using namespace BOSS;
 
-DFBB_BuildOrderStackSearch::DFBB_BuildOrderStackSearch(const DFBB_BuildOrderSearchParameters & p)
+ExperimentalStackSearch::ExperimentalStackSearch(const DFBB_BuildOrderSearchParameters & p, const ChildSort& sort)
     : m_params(p)
     , m_depth(0)
     , m_firstSearch(true)
     , m_wasInterrupted(false)
-    , m_stack(100, StackData())
+    , m_stack(100, EStackData())
+    , sort(sort)
 {
     
 }
 
-void DFBB_BuildOrderStackSearch::setTimeLimit(double ms)
+void ExperimentalStackSearch::setTimeLimit(double ms)
 {
     m_params.m_searchTimeLimit = ms;
 }
 
 // function which is called to do the actual search
-void DFBB_BuildOrderStackSearch::search()
+void ExperimentalStackSearch::search()
 {
     m_searchTimer.start();
 
@@ -59,12 +60,12 @@ void DFBB_BuildOrderStackSearch::search()
     }
 }
 
-const DFBB_BuildOrderSearchResults & DFBB_BuildOrderStackSearch::getResults() const
+const DFBB_BuildOrderSearchResults & ExperimentalStackSearch::getResults() const
 {
     return m_results;
 }
 
-void DFBB_BuildOrderStackSearch::generateLegalActions(const GameState & state, ActionSet & legalActions)
+void ExperimentalStackSearch::generateLegalActions(const GameState & state, ActionSet & legalActions)
 {
     legalActions.clear();
     BuildOrderSearchGoal & goal = m_params.m_goal;
@@ -154,7 +155,7 @@ void DFBB_BuildOrderStackSearch::generateLegalActions(const GameState & state, A
     }
 }
 
-size_t DFBB_BuildOrderStackSearch::getRepetitions(const GameState & state, const ActionType & a)
+size_t ExperimentalStackSearch::getRepetitions(const GameState & state, const ActionType & a)
 {
     // set the repetitions if we are using repetitions, otherwise set to 1
     int repeat = m_params.m_useRepetitions ? m_params.getRepetitions(a) : 1;
@@ -179,14 +180,14 @@ size_t DFBB_BuildOrderStackSearch::getRepetitions(const GameState & state, const
     return repeat;
 }
 
-bool DFBB_BuildOrderStackSearch::isTimeOut()
+bool ExperimentalStackSearch::isTimeOut()
 {
     return (m_params.m_searchTimeLimit && (m_results.nodesExpanded % 200 == 0) && (m_searchTimer.getElapsedTimeInMilliSec() > m_params.m_searchTimeLimit));
 }
 
-void DFBB_BuildOrderStackSearch::updateResults(const GameState & state)
+void ExperimentalStackSearch::updateResults(const GameState & state)
 {
-    int finishTime = state.getLastActionFinishTime();
+    int finishTime = state.getCurrentFrame() + state.getLastActionFinishTime();
 
     // new best solution
     if (finishTime < m_results.upperBound)
@@ -213,7 +214,7 @@ void DFBB_BuildOrderStackSearch::updateResults(const GameState & state)
 #define DFBB_CALL_RECURSE { ++m_depth; goto SEARCH_BEGIN; }
 
 // recursive function which does all search logic
-void DFBB_BuildOrderStackSearch::DFBB()
+void ExperimentalStackSearch::DFBB()
 {
     int actionFinishTime = 0;
     int heuristicTime = 0;
@@ -227,8 +228,9 @@ SEARCH_BEGIN:
     {
         throw DFBB_TIMEOUT_EXCEPTION;
     }
-
-    generateLegalActions(STATE, LEGAL_ACTIONS);
+    ActionSet legal;
+    generateLegalActions(STATE, legal);
+    LEGAL_ACTIONS = sort(legal, STATE);
     for (CHILD_NUM = 0; CHILD_NUM < LEGAL_ACTIONS.size(); ++CHILD_NUM)
     {
         ACTION_TYPE = LEGAL_ACTIONS[CHILD_NUM];

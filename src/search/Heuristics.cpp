@@ -1,4 +1,5 @@
 #include "Heuristics.h"
+#include "BuildOrderSearchGoal.h"
 #include <queue>
 
 using namespace BOSS;
