@@ -1,0 +1,19 @@
+Build Order Length 5797
+Build Order: Probe Probe Probe Pylon Gateway Assimilator CyberneticsCore CitadelofAdun TemplarArchives Probe Probe Probe HighTemplar 
+Default Ordering:  Nodes Expanded = 2515714 ProcessingTime = 25852.5 Nodes per Second = 97310.3
+Reverse Ordering:  Nodes Expanded = 838878 ProcessingTime = 6960.02 Nodes per Second = 120528
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 2442091 ProcessingTime = 25243.4 Nodes per Second = 96741.6
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 1289136 ProcessingTime = 12223.5 Nodes per Second = 105463
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 2504411 ProcessingTime = 26375.5 Nodes per Second = 94952
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 2433419 ProcessingTime = 25379.1 Nodes per Second = 95882.7
+Naive Preferred Default Ordering:  Nodes Expanded = 627907 ProcessingTime = 9453.88 Nodes per Second = 66417.9
+Naive Preferred F2 Ordering:  Nodes Expanded = 583489 ProcessingTime = 8884.82 Nodes per Second = 65672.6
+Most Prerequisites Ordering:  Nodes Expanded = 816441 ProcessingTime = 7417.31 Nodes per Second = 110072
+Least Prerequisites Ordering:  Nodes Expanded = 1269171 ProcessingTime = 10765.5 Nodes per Second = 117893
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 853702 ProcessingTime = 7009.66 Nodes per Second = 121789
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 1295456 ProcessingTime = 12249.6 Nodes per Second = 105755
+Longest Build Time Ordering:  Nodes Expanded = 838878 ProcessingTime = 6863.75 Nodes per Second = 122219
+Shortest Build Time Ordering:  Nodes Expanded = 2515714 ProcessingTime = 25824.9 Nodes per Second = 97414.3
+Latest Completion Time Ordering:  Nodes Expanded = 838878 ProcessingTime = 7284.32 Nodes per Second = 115162
+Soonest Completion Time Ordering:  Nodes Expanded = 1144161 ProcessingTime = 11153.2 Nodes per Second = 102586
+Random Ordering:  Mean Nodes Expanded (50 samples) = 737110

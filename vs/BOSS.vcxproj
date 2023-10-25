@@ -95,7 +95,7 @@
     <ClInclude Include="..\src\search\CombatSearch_BucketData.h" />
     <ClInclude Include="..\src\search\CombatSearch_Integral.h" />
     <ClInclude Include="..\src\search\CombatSearch_IntegralData.h" />
-    <ClInclude Include="..\src\search\DFBB_OrderingExperiments.h" />
+    <ClInclude Include="..\src\search\DFBB_OrderingExperiments.hpp" />
     <ClInclude Include="..\src\search\ExperimentalSmartSearch.h" />
     <ClInclude Include="..\src\search\DFBB_BuildOrderSearchParameters.h" />
     <ClInclude Include="..\src\search\DFBB_BuildOrderSearchResults.h" />

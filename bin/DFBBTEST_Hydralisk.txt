@@ -1,0 +1,19 @@
+Build Order Length 4131
+Build Order: Drone Drone Drone Drone Drone SpawningPool Drone Overlord Extractor Drone Drone Drone HydraliskDen Hydralisk Hydralisk Hydralisk Hydralisk 
+Default Ordering:  Nodes Expanded = 265131 ProcessingTime = 2397.71 Nodes per Second = 110577
+Reverse Ordering:  Nodes Expanded = 543853 ProcessingTime = 4611.49 Nodes per Second = 117934
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 262327 ProcessingTime = 2333.88 Nodes per Second = 112399
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 238195 ProcessingTime = 2098.47 Nodes per Second = 113509
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 186856 ProcessingTime = 1724.12 Nodes per Second = 108378
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 262860 ProcessingTime = 2375.89 Nodes per Second = 110636
+Naive Preferred Default Ordering:  Nodes Expanded = 230265 ProcessingTime = 4761.64 Nodes per Second = 48358.4
+Naive Preferred F2 Ordering:  Nodes Expanded = 212399 ProcessingTime = 4336.48 Nodes per Second = 48979.6
+Most Prerequisites Ordering:  Nodes Expanded = 264793 ProcessingTime = 2299.14 Nodes per Second = 115171
+Least Prerequisites Ordering:  Nodes Expanded = 547283 ProcessingTime = 4764.14 Nodes per Second = 114876
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 562530 ProcessingTime = 4774.34 Nodes per Second = 117824
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 254171 ProcessingTime = 2250.57 Nodes per Second = 112936
+Longest Build Time Ordering:  Nodes Expanded = 551395 ProcessingTime = 4738.45 Nodes per Second = 116366
+Shortest Build Time Ordering:  Nodes Expanded = 238087 ProcessingTime = 2066.54 Nodes per Second = 115211
+Latest Completion Time Ordering:  Nodes Expanded = 551440 ProcessingTime = 5055.06 Nodes per Second = 109087
+Soonest Completion Time Ordering:  Nodes Expanded = 243283 ProcessingTime = 2267.69 Nodes per Second = 107282
+Random Ordering:  Mean Nodes Expanded (50 samples) = 361614

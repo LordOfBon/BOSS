@@ -106,7 +106,6 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
             for (size_t i(0); i < ActionTypes::GetAllActionTypes().size(); ++i)
             {
                 const ActionType & type(i);
-
                 if (type.isMorphed() && m_state.getRace() == type.getRace())
                 {
                     const ActionType & morpher = type.whatBuilds();
@@ -116,8 +115,8 @@ const BuildOrder & NaiveBuildOrderSearch::solve()
                     int boMoprher = buildOrder.getTypeCount(morpher);
 
                     int need = willMorph - haveMorpher - boMoprher;
-
-                    if (need > 0)
+                    const static ActionType larva("Larva");
+                    if (need > 0 && morpher != larva)
                     {
                         neededMorphers[morpher.getID()] += need;
                     }

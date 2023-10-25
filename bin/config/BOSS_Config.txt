@@ -49,6 +49,22 @@
             "OutputFile"    : "DTRush_Opt.txt", 
             "Race"          : "Protoss",
             "State"         : "Protoss Start State"
+        },
+
+        "BO Optimization" :
+        {
+            "Run"           : true,
+            "Type"          : "BuildOrderOptimization",
+            "OutputDir"     : "OptimizationResults",
+            "RandomIterations" : 50,
+            "Scenarios"     :   
+            [ 
+                { "Name" : "Marines", "State" : "Terran Start State", "BuildOrderGoal" : "4 Marine" },
+                { "Name" : "SiegeTank", "State" : "Terran Start State", "BuildOrderGoal" : "1 Tank" },
+                { "Name" : "ControlTower", "State" : "Terran Start State", "BuildOrderGoal" : "1 ControlTower" },
+                { "Name" : "Firebat", "State" : "Terran Start State", "BuildOrderGoal" : "2 Firebat" },
+                { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" },
+            ] 
         }
     },
 
@@ -85,6 +101,11 @@
     {
         "2 Dark Templars"       : { "race" : "Protoss", "goal" : [ ["DarkTemplar", 2] ], "goalMax" : [] },
         "8 Zealots 2 Dragoons"  : { "race" : "Protoss", "goal" : [ ["Zealot", 8], ["Dragoon", 2] ], "goalMax" : [] },
-        "6 Mutalisks"           : { "race" : "Zerg", "goal" : [ ["Mutalisk", 6] ], "goalMax" : [] }
+        "6 Mutalisks"           : { "race" : "Zerg", "goal" : [ ["Mutalisk", 6] ], "goalMax" : [] },
+        "4 Marine"              : { "race" : "Terran", "goal" : [ ["Marine", 4] ], "goalMax" : [] },
+        "1 Tank"                : { "race" : "Terran", "goal" : [ ["SiegeTank", 1] ], "goalMax" : [] },
+        "1 ControlTower"        : { "race" : "Terran", "goal" : [ ["ControlTower", 1] ], "goalMax" : [] },
+        "2 Firebat"             : { "race" : "Terran", "goal" : [ ["Firebat", 2] ], "goalMax" : [] },
+        "1 Medic"               : { "race" : "Terran", "goal" : [ ["Medic", 1] ], "goalMax" : [] },
     }
 }

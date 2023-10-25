@@ -3,6 +3,7 @@
 #include "CombatSearchExperiment.h"
 #include "BuildOrderPlotter.h"
 #include "FileTools.h"
+#include "DFBB_OrderingExperiments.hpp"
 
 using namespace BOSS;
 
@@ -33,6 +34,10 @@ void Experiments::RunExperiments(const std::string & experimentFilename)
             else if (type == "BuildOrderPlot")
             {
                 RunBuildOrderPlot(name, val);
+            }
+            else if (type == "BuildOrderOptimization")
+            {
+                RunExperimentalBuildOrderOptimization(name, val);
             }
             else
             {
@@ -78,6 +83,35 @@ void Experiments::RunBuildOrderPlot(const std::string & name, const json & j)
     }
 
     plotter.doPlots();
+
+    std::cout << "    " << name << " completed" << std::endl;
+}
+
+void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string& name, const json& j)
+{
+    std::cout << "Build Order Experimental Optimization - " << name << std::endl;
+
+    BOSS_ASSERT(j.count("Scenarios") && j["Scenarios"].is_array(), "Experiment has no Scenarios array");
+    BOSS_ASSERT(j.count("OutputDir") && j["OutputDir"].is_string(), "Experiment has no OutputDir string");
+    BOSS_ASSERT(j.count("RandomIterations") && j["RandomIterations"].is_number_unsigned(), "Experiment has no 'RandomIterations' number");
+       
+    unsigned int rIters = j["RandomIterations"].get<unsigned int>();
+
+    std::string outputDir(j["OutputDir"].get<std::string>());
+    FileTools::MakeDirectory(outputDir);
+    outputDir = outputDir + "/" + Assert::CurrentDateTime() + "_" + name;
+    FileTools::MakeDirectory(outputDir);
+
+    for (auto& scenario : j["Scenarios"])
+    {
+        BOSS_ASSERT(scenario.count("State") && scenario["State"].is_string(), "Scenario has no 'state' string");
+        BOSS_ASSERT(scenario.count("Name") && scenario["Name"].is_string(), "Scenario has no 'name' string");
+        BOSS_ASSERT(scenario.count("BuildOrderGoal") && scenario["BuildOrderGoal"].is_string(), "Scenario has no 'BuildOrderGoal' string");
+
+        std::cout << "    Plotting Build Order: " << scenario["BuildOrder"] << "\n";
+        runDFBBExperiments(BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters);
+    }
+
 
     std::cout << "    " << name << " completed" << std::endl;
 }

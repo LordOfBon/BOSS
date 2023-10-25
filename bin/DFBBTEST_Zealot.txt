@@ -1,0 +1,19 @@
+Build Order Length 3917
+Build Order: Probe Probe Pylon Gateway Gateway Probe Zealot Zealot Zealot Zealot 
+Default Ordering:  Nodes Expanded = 1926800 ProcessingTime = 15183.4 Nodes per Second = 126902
+Reverse Ordering:  Nodes Expanded = 955976 ProcessingTime = 7360.07 Nodes per Second = 129887
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 1920377 ProcessingTime = 15321.3 Nodes per Second = 125340
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 1831533 ProcessingTime = 14600.4 Nodes per Second = 125444
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 1920377 ProcessingTime = 15329.9 Nodes per Second = 125270
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 1918156 ProcessingTime = 15367 Nodes per Second = 124823
+Naive Preferred Default Ordering:  Nodes Expanded = 953034 ProcessingTime = 15136 Nodes per Second = 62964.9
+Naive Preferred F2 Ordering:  Nodes Expanded = 953034 ProcessingTime = 15243.5 Nodes per Second = 62520.5
+Most Prerequisites Ordering:  Nodes Expanded = 1120358 ProcessingTime = 8815.11 Nodes per Second = 127095
+Least Prerequisites Ordering:  Nodes Expanded = 1667457 ProcessingTime = 12868.5 Nodes per Second = 129576
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 958811 ProcessingTime = 7534.27 Nodes per Second = 127260
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 1924579 ProcessingTime = 15262 Nodes per Second = 126103
+Longest Build Time Ordering:  Nodes Expanded = 955976 ProcessingTime = 7397.07 Nodes per Second = 129237
+Shortest Build Time Ordering:  Nodes Expanded = 1926800 ProcessingTime = 15192.6 Nodes per Second = 126825
+Latest Completion Time Ordering:  Nodes Expanded = 957633 ProcessingTime = 8187.17 Nodes per Second = 116968
+Soonest Completion Time Ordering:  Nodes Expanded = 1833498 ProcessingTime = 15835.8 Nodes per Second = 115782
+Random Ordering:  Mean Nodes Expanded (50 samples) = 1.1277e+06

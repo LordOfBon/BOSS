@@ -933,8 +933,81 @@ TEST_CASE("Macro Frequency Search")
 
 #define DFBBOrderingTests
 #ifdef DFBBOrderingTests
-#include "search/DFBB_OrderingExperiments.h"
+#include "search/DFBB_OrderingExperiments.hpp"
 TEST_CASE("DFBB Ordering Tests")
+{
+    std::pair<BuildOrderSearchGoal, std::string> marine;
+    marine.first.setGoal(ActionType("Marine"), 4);
+    marine.second = "Marine";
+
+    std::pair<BuildOrderSearchGoal, std::string> tank;
+    tank.first.setGoal(ActionType("SiegeTank"), 1);
+    tank.second = "Tank";
+
+    std::pair<BuildOrderSearchGoal, std::string> control;
+    control.first.setGoal(ActionType("ControlTower"), 1);
+    control.second = "ControlTower";
+
+    std::pair<BuildOrderSearchGoal, std::string> fire;
+    fire.first.setGoal(ActionType("Firebat"), 2);
+    fire.second = "Firebat";
+
+    std::pair<BuildOrderSearchGoal, std::string> medic;
+    medic.first.setGoal(ActionType("Medic"), 1);
+    medic.second = "Medic";
+    
+    //DFBB_experiments({marine, tank, control, fire, medic}, Races::Terran, 50);
+
+    std::pair<BuildOrderSearchGoal, std::string> hydra;
+    hydra.first.setGoal(ActionType("Hydralisk"), 4);
+    hydra.second = "Hydralisk";
+
+    std::pair<BuildOrderSearchGoal, std::string> muta;
+    muta.first.setGoal(ActionType("Mutalisk"), 2);
+    muta.second = "Mutalisk";
+
+    std::pair<BuildOrderSearchGoal, std::string> gspire;
+    gspire.first.setGoal(ActionType("GreaterSpire"), 1);
+    gspire.second = "GreaterSpire";
+
+    std::pair<BuildOrderSearchGoal, std::string> lurker;
+    lurker.first.setGoal(ActionType("Lurker"), 1);
+    lurker.second = "Lurker";
+
+    std::pair<BuildOrderSearchGoal, std::string> spore;
+    spore.first.setGoal(ActionType("SporeColony"), 3);
+    spore.second = "SporeColony";
+    
+    //DFBB_experiments({ spore}, Races::Zerg, 50);
+
+    std::pair<BuildOrderSearchGoal, std::string> templar;
+    templar.first.setGoal(ActionType("HighTemplar"), 1);
+    templar.second = "HighTemplar";
+
+    std::pair<BuildOrderSearchGoal, std::string> carrier;
+    carrier.first.setGoal(ActionType("Carrier"), 1);
+    carrier.second = "Carrier";
+
+    std::pair<BuildOrderSearchGoal, std::string> zealot;
+    zealot.first.setGoal(ActionType("Zealot"), 4);
+    zealot.second = "Zealot";
+
+    std::pair<BuildOrderSearchGoal, std::string> dragoon;
+    dragoon.first.setGoal(ActionType("Dragoon"), 4);
+    dragoon.second = "Dragoon";
+
+    std::pair<BuildOrderSearchGoal, std::string> rsupport;
+    rsupport.first.setGoal(ActionType("RoboticsSupportBay"), 1);
+    rsupport.second = "RoboticsSupportBay";
+
+    DFBB_experiments({ carrier, zealot, dragoon, rsupport }, Races::Protoss, 50);
+}
+#endif // DFBB Ordering Tests
+
+//#define RandomOrderingTest
+#include "search/ExperimentalSmartSearch.h"
+#ifdef RandomOrderingTest
+TEST_CASE("Random Ordering Test")
 {
     BOSS::GameState state;
     state.addUnit(ActionType("CommandCenter"));
@@ -946,8 +1019,17 @@ TEST_CASE("DFBB Ordering Tests")
 
     BuildOrderSearchGoal goal;
     goal.setGoal(ActionType("Marine"), 4);
-    
-    runDFBBExperiments(state, goal, "DFBBTEST_Marine.txt", 10);
+
+    ExperimentalSmartSearch search;
+    search.setGoal(goal);
+    search.setState(state);
+    search.setTimeLimit(10000000);
+
+    search.setSortFunction(makeRandomSort());
+    search.search();
+
+    std::cout << "Nodes Expanded: " << search.getResults().nodesExpanded << std::endl;
 }
-#endif // DFBB Ordering Tests
+#endif // RandomOrderingTest
+
 

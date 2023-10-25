@@ -233,7 +233,7 @@
     <ClInclude Include="..\src\search\ExperimentalStackSearch.h">
       <Filter>search\BuildOrderSearch\ExperimentalSearch</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\search\DFBB_OrderingExperiments.h">
+    <ClInclude Include="..\src\search\DFBB_OrderingExperiments.hpp">
       <Filter>search\BuildOrderSearch\ExperimentalSearch</Filter>
     </ClInclude>
     <ClInclude Include="..\src\search\ExperimentalSortFunctions.h">
