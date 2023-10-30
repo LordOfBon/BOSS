@@ -5,7 +5,7 @@
     {    
         "BuildOrderPlot" :
         {
-            "Run"           : true,
+            "Run"           : false,
             "Type"          : "BuildOrderPlot",
             "OutputDir"     : "results",
             "Scenarios"     :   
@@ -57,13 +57,14 @@
             "Type"          : "BuildOrderOptimization",
             "OutputDir"     : "OptimizationResults",
             "RandomIterations" : 50,
+            "UseLandmarkBound" : true,
             "Scenarios"     :   
             [ 
                 { "Name" : "Marines", "State" : "Terran Start State", "BuildOrderGoal" : "4 Marine" },
                 { "Name" : "SiegeTank", "State" : "Terran Start State", "BuildOrderGoal" : "1 Tank" },
                 { "Name" : "ControlTower", "State" : "Terran Start State", "BuildOrderGoal" : "1 ControlTower" },
                 { "Name" : "Firebat", "State" : "Terran Start State", "BuildOrderGoal" : "2 Firebat" },
-                { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" },
+                { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" }
             ] 
         }
     },
@@ -106,6 +107,6 @@
         "1 Tank"                : { "race" : "Terran", "goal" : [ ["SiegeTank", 1] ], "goalMax" : [] },
         "1 ControlTower"        : { "race" : "Terran", "goal" : [ ["ControlTower", 1] ], "goalMax" : [] },
         "2 Firebat"             : { "race" : "Terran", "goal" : [ ["Firebat", 2] ], "goalMax" : [] },
-        "1 Medic"               : { "race" : "Terran", "goal" : [ ["Medic", 1] ], "goalMax" : [] },
+        "1 Medic"               : { "race" : "Terran", "goal" : [ ["Medic", 1] ], "goalMax" : [] }
     }
 }

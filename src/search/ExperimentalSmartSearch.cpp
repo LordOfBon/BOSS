@@ -8,6 +8,12 @@ ExperimentalSmartSearch::ExperimentalSmartSearch(const ChildSort & sort)
     , m_searchTimeLimit(30)
     , sort(sort)
 {
+    m_params.m_useSupplyBounding = false;
+    m_params.m_useAlwaysMakeWorkers = false;
+    m_params.m_useIncreasingRepetitions = false;
+    m_params.m_useLandmarkLowerBoundHeuristic = false;
+    m_params.m_useRepetitions = false;
+    m_params.m_useResourceLowerBoundHeuristic = false;
 }
 
 void ExperimentalSmartSearch::doSearch()
@@ -27,12 +33,6 @@ void ExperimentalSmartSearch::doSearch()
         m_params.m_initialState             = m_initialState;
         m_params.m_relevantActions          = m_relevantActions;
         m_params.m_searchTimeLimit          = m_searchTimeLimit;
-        m_params.m_useSupplyBounding        = false;
-        m_params.m_useAlwaysMakeWorkers     = false;
-        m_params.m_useIncreasingRepetitions = false;
-        m_params.m_useLandmarkLowerBoundHeuristic = false;
-        m_params.m_useRepetitions = false;
-        m_params.m_useResourceLowerBoundHeuristic = false;
 
         //BWAPI::Broodwar->printf("Constructing new search object time limit is %lf", _params.searchTimeLimit);
         m_stackSearch = ExperimentalStackSearch(m_params, sort);
@@ -293,6 +293,11 @@ void ExperimentalSmartSearch::setTimeLimit(int n)
 void BOSS::ExperimentalSmartSearch::setSortFunction(const ChildSort& sort)
 {
     this->sort = sort;
+}
+
+void BOSS::ExperimentalSmartSearch::setParameters(DFBB_BuildOrderSearchParameters params)
+{
+    m_params = params;
 }
 
 void ExperimentalSmartSearch::search()

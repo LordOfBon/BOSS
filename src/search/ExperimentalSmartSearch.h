@@ -49,6 +49,7 @@ public:
     void print();
     void setTimeLimit(int n);
     void setSortFunction(const ChildSort& sort);
+    void setParameters(DFBB_BuildOrderSearchParameters params);
 
     void search();
 
