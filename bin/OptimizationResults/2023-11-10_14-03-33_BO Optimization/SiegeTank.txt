@@ -1,0 +1,19 @@
+Build Order Length 5382
+Build Order: SCV SCV SCV Barracks SCV SCV Refinery SCV Factory SupplyDepot SCV SupplyDepot SCV MachineShop SCV SCV SiegeTank 
+Default Ordering:  Nodes Expanded = 216 ProcessingTime = 1.864 Nodes per Second = 115880
+Reverse Ordering:  Nodes Expanded = 99 ProcessingTime = 2.2395 Nodes per Second = 44206.3
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 131 ProcessingTime = 3.0832 Nodes per Second = 42488.3
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 99 ProcessingTime = 2.1791 Nodes per Second = 45431.6
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 131 ProcessingTime = 3.1504 Nodes per Second = 41582
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 199 ProcessingTime = 5.0265 Nodes per Second = 39590.2
+Naive Preferred Default Ordering:  Nodes Expanded = 99 ProcessingTime = 4.5514 Nodes per Second = 21751.5
+Naive Preferred F2 Ordering:  Nodes Expanded = 99 ProcessingTime = 3.941 Nodes per Second = 25120.5
+Most Prerequisites Ordering:  Nodes Expanded = 161 ProcessingTime = 2.9595 Nodes per Second = 54401.1
+Least Prerequisites Ordering:  Nodes Expanded = 125 ProcessingTime = 2.1737 Nodes per Second = 57505.6
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 105 ProcessingTime = 1.5581 Nodes per Second = 67389.8
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 204 ProcessingTime = 2.4252 Nodes per Second = 84116.8
+Longest Build Time Ordering:  Nodes Expanded = 105 ProcessingTime = 1.1445 Nodes per Second = 91743.1
+Shortest Build Time Ordering:  Nodes Expanded = 204 ProcessingTime = 2.4353 Nodes per Second = 83767.9
+Latest Completion Time Ordering:  Nodes Expanded = 105 ProcessingTime = 1.1586 Nodes per Second = 90626.6
+Soonest Completion Time Ordering:  Nodes Expanded = 204 ProcessingTime = 1.7479 Nodes per Second = 116711
+Random Ordering:  Mean Nodes Expanded (50 samples) = 140.7

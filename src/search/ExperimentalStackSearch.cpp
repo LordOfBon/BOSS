@@ -235,9 +235,10 @@ SEARCH_BEGIN:
     {
         ACTION_TYPE = LEGAL_ACTIONS[CHILD_NUM];
 
+        
         actionFinishTime = STATE.whenCanBuild(ACTION_TYPE) + ACTION_TYPE.buildTime();
         heuristicTime    = STATE.getCurrentFrame() + Tools::GetLowerBound(STATE, m_params.m_goal);
-        maxHeuristic     = (actionFinishTime > heuristicTime) ? actionFinishTime : heuristicTime;
+        maxHeuristic     = ((actionFinishTime > heuristicTime) || m_params.m_useLandmarkLowerBoundHeuristic) ? actionFinishTime : heuristicTime;
 
         if (maxHeuristic > m_results.upperBound)
         {

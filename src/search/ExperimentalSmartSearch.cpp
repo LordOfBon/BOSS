@@ -316,10 +316,6 @@ const DFBB_BuildOrderSearchParameters & ExperimentalSmartSearch::getParameters()
 
     m_params.m_goal = m_goal;
     m_params.m_initialState                = m_initialState;
-    m_params.m_useRepetitions 				= true;
-    m_params.m_useIncreasingRepetitions 	= true;
-    m_params.m_useAlwaysMakeWorkers 		= true;
-    m_params.m_useSupplyBounding 			= true;
 
     return m_params;
 }

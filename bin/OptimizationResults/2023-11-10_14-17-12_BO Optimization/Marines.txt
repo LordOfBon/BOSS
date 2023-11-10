@@ -1,0 +1,19 @@
+Build Order Length 0
+Build Order: 
+Default Ordering:  Nodes Expanded = 35 ProcessingTime = 0.3403 Nodes per Second = 102850
+Reverse Ordering:  Nodes Expanded = 35 ProcessingTime = 0.7612 Nodes per Second = 45980
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 35 ProcessingTime = 0.2224 Nodes per Second = 157374
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 35 ProcessingTime = 0.2191 Nodes per Second = 159744
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 35 ProcessingTime = 0.2474 Nodes per Second = 141471
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 35 ProcessingTime = 0.2125 Nodes per Second = 164706
+Naive Preferred Default Ordering:  Nodes Expanded = 35 ProcessingTime = 0.519 Nodes per Second = 67437.4
+Naive Preferred F2 Ordering:  Nodes Expanded = 35 ProcessingTime = 0.5621 Nodes per Second = 62266.5
+Most Prerequisites Ordering:  Nodes Expanded = 35 ProcessingTime = 0.2393 Nodes per Second = 146260
+Least Prerequisites Ordering:  Nodes Expanded = 35 ProcessingTime = 0.8046 Nodes per Second = 43499.9
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 35 ProcessingTime = 0.8054 Nodes per Second = 43456.7
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 35 ProcessingTime = 0.8036 Nodes per Second = 43554
+Longest Build Time Ordering:  Nodes Expanded = 35 ProcessingTime = 0.2407 Nodes per Second = 145409
+Shortest Build Time Ordering:  Nodes Expanded = 35 ProcessingTime = 0.253 Nodes per Second = 138340
+Latest Completion Time Ordering:  Nodes Expanded = 35 ProcessingTime = 0.2419 Nodes per Second = 144688
+Soonest Completion Time Ordering:  Nodes Expanded = 35 ProcessingTime = 0.2396 Nodes per Second = 146077
+Random Ordering:  Mean Nodes Expanded (50 samples) = 35

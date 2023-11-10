@@ -1,0 +1,19 @@
+Build Order Length 4027
+Build Order: SCV SCV SCV Barracks SCV SCV Academy SCV Barracks Refinery SupplyDepot Firebat Firebat 
+Default Ordering:  Nodes Expanded = 326 ProcessingTime = 4.9145 Nodes per Second = 66334.3
+Reverse Ordering:  Nodes Expanded = 110 ProcessingTime = 1.9195 Nodes per Second = 57306.6
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 192 ProcessingTime = 3.5768 Nodes per Second = 53679.3
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 116 ProcessingTime = 2.0763 Nodes per Second = 55868.6
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 162 ProcessingTime = 2.72 Nodes per Second = 59558.8
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 306 ProcessingTime = 5.0485 Nodes per Second = 60612.1
+Naive Preferred Default Ordering:  Nodes Expanded = 118 ProcessingTime = 2.8624 Nodes per Second = 41224.1
+Naive Preferred F2 Ordering:  Nodes Expanded = 116 ProcessingTime = 2.7839 Nodes per Second = 41668.2
+Most Prerequisites Ordering:  Nodes Expanded = 244 ProcessingTime = 2.7183 Nodes per Second = 89762
+Least Prerequisites Ordering:  Nodes Expanded = 140 ProcessingTime = 3.4605 Nodes per Second = 40456.6
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 118 ProcessingTime = 2.651 Nodes per Second = 44511.5
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 324 ProcessingTime = 7.9401 Nodes per Second = 40805.5
+Longest Build Time Ordering:  Nodes Expanded = 118 ProcessingTime = 3.1072 Nodes per Second = 37976.3
+Shortest Build Time Ordering:  Nodes Expanded = 324 ProcessingTime = 8.9407 Nodes per Second = 36238.8
+Latest Completion Time Ordering:  Nodes Expanded = 116 ProcessingTime = 3.1238 Nodes per Second = 37134.3
+Soonest Completion Time Ordering:  Nodes Expanded = 319 ProcessingTime = 2.4635 Nodes per Second = 129491
+Random Ordering:  Mean Nodes Expanded (50 samples) = 218.34
