@@ -6,7 +6,7 @@
 
 namespace BOSS
 {
-    void runDFBBExperiments(const GameState& state, const BuildOrderSearchGoal& goal, const std::string outfile, unsigned int randomIterations, bool useLandmark = false)
+    void runDFBBExperiments(const GameState& state, const BuildOrderSearchGoal& goal, const std::string outfile, unsigned int randomIterations, DFBB_BuildOrderSearchParameters params = DFBB_BuildOrderSearchParameters())
     {
         auto f2sort = makeSortFromFrequencyData("config/FrequencyData2.json");
         std::vector<std::pair<std::string, ChildSort>> experiments =
@@ -36,7 +36,8 @@ namespace BOSS
         search.setState(state);
         search.setTimeLimit(10000000);
         auto params = search.getParameters();
-        params.m_useLandmarkLowerBoundHeuristic = useLandmark;
+        params.m_useLandmarkLowerBoundHeuristic = params.m_useLandmarkLowerBoundHeuristic;
+        params.m_useResourceLowerBoundHeuristic = params.m_useResourceLowerBoundHeuristic;
         search.setParameters(params);
 
         std::ofstream out(outfile);

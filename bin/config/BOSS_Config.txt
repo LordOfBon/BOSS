@@ -57,7 +57,7 @@
             "Type"          : "BuildOrderOptimization",
             "OutputDir"     : "OptimizationResults",
             "RandomIterations" : 50,
-            "UseLandmarkBound" : true,
+            "UseLandmarkBound" : false,
             "Scenarios"     :   
             [ 
                 { "Name" : "Marines", "State" : "Terran Start State", "BuildOrderGoal" : "4 Marine" },
