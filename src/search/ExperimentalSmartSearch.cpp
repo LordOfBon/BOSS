@@ -34,7 +34,6 @@ void ExperimentalSmartSearch::doSearch()
         m_params.m_relevantActions          = m_relevantActions;
         m_params.m_searchTimeLimit          = m_searchTimeLimit;
 
-        //BWAPI::Broodwar->printf("Constructing new search object time limit is %lf", _params.searchTimeLimit);
         m_stackSearch = ExperimentalStackSearch(m_params, sort);
         m_stackSearch.search();
     }

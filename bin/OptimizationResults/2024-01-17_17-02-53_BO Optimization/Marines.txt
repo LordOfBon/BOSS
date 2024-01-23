@@ -1,0 +1,19 @@
+Build Order Length 3123
+Build Order: SCV Barracks Barracks Marine Marine Marine Marine 
+Default Ordering:  Nodes Expanded = 5734 ProcessingTime = 13941.7 Nodes per Second = 411.285
+Reverse Ordering:  Nodes Expanded = 4330 ProcessingTime = 10461.7 Nodes per Second = 413.892
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 5650 ProcessingTime = 13836.6 Nodes per Second = 408.338
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 5392 ProcessingTime = 13259.4 Nodes per Second = 406.654
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 5391 ProcessingTime = 13126.2 Nodes per Second = 410.706
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 5682 ProcessingTime = 13959 Nodes per Second = 407.051
+Naive Preferred Default Ordering:  Nodes Expanded = 4631 ProcessingTime = 19794.6 Nodes per Second = 233.953
+Naive Preferred F2 Ordering:  Nodes Expanded = 4319 ProcessingTime = 18488.2 Nodes per Second = 233.608
+Most Prerequisites Ordering:  Nodes Expanded = 5725 ProcessingTime = 13971.4 Nodes per Second = 409.765
+Least Prerequisites Ordering:  Nodes Expanded = 4350 ProcessingTime = 10439.3 Nodes per Second = 416.697
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 4350 ProcessingTime = 10567.8 Nodes per Second = 411.626
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 5725 ProcessingTime = 14046.1 Nodes per Second = 407.585
+Longest Build Time Ordering:  Nodes Expanded = 4337 ProcessingTime = 10588.9 Nodes per Second = 409.579
+Shortest Build Time Ordering:  Nodes Expanded = 5731 ProcessingTime = 14107.3 Nodes per Second = 406.245
+Latest Completion Time Ordering:  Nodes Expanded = 4334 ProcessingTime = 12580 Nodes per Second = 344.516
+Soonest Completion Time Ordering:  Nodes Expanded = 5731 ProcessingTime = 16855.5 Nodes per Second = 340.007
+Random Ordering:  Mean Nodes Expanded (50 samples) = 5024.2

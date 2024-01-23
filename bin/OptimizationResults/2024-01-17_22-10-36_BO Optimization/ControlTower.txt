@@ -1,0 +1,3 @@
+Build Order Length 5349
+Build Order: SCV SCV SCV Barracks Refinery Factory SCV Starport SCV SCV ControlTower 
+Default Ordering:  Nodes Expanded = 3608443 ProcessingTime = 4.62682e+06 Nodes per Second = 779.897

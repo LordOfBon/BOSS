@@ -1,0 +1,10 @@
+Build Order Length 5049
+Build Order: SCV SCV SCV Barracks Refinery Factory SCV MachineShop SiegeTank 
+Default Ordering:  Nodes Expanded = 2518785 ProcessingTime = 3.50075e+06 Nodes per Second = 719.499
+Reverse Ordering:  Nodes Expanded = 2320831 ProcessingTime = 2.01241e+06 Nodes per Second = 1153.26
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 2381528 ProcessingTime = 2.29126e+06 Nodes per Second = 1039.4
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 1058688 ProcessingTime = 883562 Nodes per Second = 1198.2
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 1227732 ProcessingTime = 1.00011e+06 Nodes per Second = 1227.59
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 2488022 ProcessingTime = 722536 Nodes per Second = 3443.46
+Naive Preferred Default Ordering:  Nodes Expanded = 1136929 ProcessingTime = 530741 Nodes per Second = 2142.15
+Naive Preferred F2 Ordering:  Nodes Expanded = 1136929 ProcessingTime = 529864 Nodes per Second = 2145.7

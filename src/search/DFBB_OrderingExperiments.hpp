@@ -35,10 +35,10 @@ namespace BOSS
         search.setGoal(goal);
         search.setState(state);
         search.setTimeLimit(10000000);
-        auto params = search.getParameters();
-        params.m_useLandmarkLowerBoundHeuristic = params.m_useLandmarkLowerBoundHeuristic;
-        params.m_useResourceLowerBoundHeuristic = params.m_useResourceLowerBoundHeuristic;
-        search.setParameters(params);
+        auto prms = search.getParameters();
+        prms.m_useLandmarkLowerBoundHeuristic = params.m_useLandmarkLowerBoundHeuristic;
+        prms.m_useResourceLowerBoundHeuristic = params.m_useResourceLowerBoundHeuristic;
+        search.setParameters(prms);
 
         std::ofstream out(outfile);
 
@@ -46,7 +46,7 @@ namespace BOSS
         int BOSize;
         for (auto& pair : experiments)
         {
-            std::cout << "Doing " << pair.first << std::endl;
+            //std::cout << "Doing " << pair.first << std::endl;
             ExperimentalSmartSearch searchC = search;
             searchC.setSortFunction(pair.second);
             searchC.search();
@@ -70,7 +70,7 @@ namespace BOSS
         LONG64 total = 0;
         for (unsigned int i(0); i < randomIterations; ++i)
         {
-            std::cout << "\rDoing Random " << (i + 1) << "/" << randomIterations;
+            //std::cout << "\rDoing Random " << (i + 1) << "/" << randomIterations;
             ExperimentalSmartSearch searchR = search;
             searchR.setSortFunction(makeRandomSort());
             searchR.search();
@@ -78,11 +78,12 @@ namespace BOSS
             total += results.nodesExpanded;
             BOSS_ASSERT(Tools::GetBuildOrderCompletionTime(state, results.buildOrder) == BOSize, "Failure in DFBB search, different orderings produced different results");
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
         double mean = ((double)total) / ((double)randomIterations);
 
         out << "Random Ordering:  Mean Nodes Expanded (" << randomIterations << " samples) = " << mean << std::endl;
         out.close();
+        std::cout << "    Finished Test, saved to " << outfile << std::endl;
     }
 
     void DFBB_experiments(std::vector<std::pair<BuildOrderSearchGoal, std::string>> goals, RaceID race, int randomIterations)

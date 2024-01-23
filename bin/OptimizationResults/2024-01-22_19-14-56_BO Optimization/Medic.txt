@@ -1,0 +1,12 @@
+Build Order Length 3577
+Build Order: SCV Barracks SCV SCV Academy Refinery SCV SCV Medic 
+Default Ordering:  Nodes Expanded = 24891 ProcessingTime = 59099.3 Nodes per Second = 421.172
+Reverse Ordering:  Nodes Expanded = 2081 ProcessingTime = 4324.98 Nodes per Second = 481.159
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 19872 ProcessingTime = 47813.7 Nodes per Second = 415.613
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 7159 ProcessingTime = 16293.7 Nodes per Second = 439.372
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 7969 ProcessingTime = 18423.7 Nodes per Second = 432.54
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 24749 ProcessingTime = 59189.6 Nodes per Second = 418.131
+Naive Preferred Default Ordering:  Nodes Expanded = 1471 ProcessingTime = 5263.29 Nodes per Second = 279.483
+Naive Preferred F2 Ordering:  Nodes Expanded = 1471 ProcessingTime = 5264.56 Nodes per Second = 279.416
+Most Prerequisites Ordering:  Nodes Expanded = 24001 ProcessingTime = 57239.2 Nodes per Second = 419.311
+Least Prerequisites Ordering:  Nodes Expanded = 3200 ProcessingTime = 6932.84 Nodes per Second = 461.571

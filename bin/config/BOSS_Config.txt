@@ -57,14 +57,17 @@
             "Type"          : "BuildOrderOptimization",
             "OutputDir"     : "OptimizationResults",
             "RandomIterations" : 50,
-            "UseLandmarkBound" : false,
+            "UseLandmarkBound" : true,
             "Scenarios"     :   
             [ 
                 { "Name" : "Marines", "State" : "Terran Start State", "BuildOrderGoal" : "4 Marine" },
                 { "Name" : "SiegeTank", "State" : "Terran Start State", "BuildOrderGoal" : "1 Tank" },
                 { "Name" : "ControlTower", "State" : "Terran Start State", "BuildOrderGoal" : "1 ControlTower" },
                 { "Name" : "Firebat", "State" : "Terran Start State", "BuildOrderGoal" : "2 Firebat" },
-                { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" }
+                { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" },
+                { "Name" : "DarkTemplars", "State" : "Protoss Start State", "BuildOrderGoal" : "2 Dark Templars"},
+                { "Name" : "ZealotDragoon", "State" : "Protoss Start State", "BuildOrderGoal" : "8 Zealots 2 Dragoons"},
+                { "Name" : "Mutalisk", "State" : "Zerg Start State", "BuildOrderGoal" : "6 Mutalisks"}
             ] 
         }
     },

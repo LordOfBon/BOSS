@@ -4,6 +4,7 @@
 #include "BuildOrderPlotter.h"
 #include "FileTools.h"
 #include "DFBB_OrderingExperiments.hpp"
+#include <thread>
 
 using namespace BOSS;
 
@@ -96,7 +97,8 @@ void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string&
     BOSS_ASSERT(j.count("RandomIterations") && j["RandomIterations"].is_number_unsigned(), "Experiment has no 'RandomIterations' number");
     BOSS_ASSERT(j.count("UseLandmarkBound") && j["UseLandmarkBound"].is_boolean(), "Experiment has no 'UseLandmarkBound' bool");
 
-    bool useLandmark = j["UseLandmarkBound"].get<bool>();
+    DFBB_BuildOrderSearchParameters params;
+    params.m_useLandmarkLowerBoundHeuristic = j["UseLandmarkBound"].get<bool>();
     unsigned int rIters = j["RandomIterations"].get<unsigned int>();
 
     std::string outputDir(j["OutputDir"].get<std::string>());
@@ -104,6 +106,7 @@ void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string&
     outputDir = outputDir + "/" + Assert::CurrentDateTime() + "_" + name;
     FileTools::MakeDirectory(outputDir);
 
+    std::vector<std::thread> threads;
     for (auto& scenario : j["Scenarios"])
     {
         BOSS_ASSERT(scenario.count("State") && scenario["State"].is_string(), "Scenario has no 'state' string");
@@ -111,7 +114,12 @@ void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string&
         BOSS_ASSERT(scenario.count("BuildOrderGoal") && scenario["BuildOrderGoal"].is_string(), "Scenario has no 'BuildOrderGoal' string");
         
         std::cout << "    Running Test: " << scenario["Name"] << "\n";
-        runDFBBExperiments(BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters, useLandmark);
+        threads.push_back(std::thread(runDFBBExperiments, BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters, params));
+    }
+
+    for (auto & thread : threads)
+    {
+        thread.join();
     }
 
 
