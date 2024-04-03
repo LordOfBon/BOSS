@@ -1,0 +1,2 @@
+Build Order Length 6759
+Build Order: Probe Probe Probe Probe Probe Pylon Probe Probe Probe Pylon Pylon Gateway Probe Probe Assimilator Probe CyberneticsCore Probe Probe Probe Gateway CitadelofAdun Probe Probe Probe TemplarArchives Probe Probe Probe DarkTemplar DarkTemplar 

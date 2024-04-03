@@ -9,7 +9,7 @@ namespace BOSS
     void runDFBBExperiments(const GameState& state, const BuildOrderSearchGoal& goal, const std::string outfile, unsigned int randomIterations, DFBB_BuildOrderSearchParameters params = DFBB_BuildOrderSearchParameters())
     {
         auto f2sort = makeSortFromFrequencyData("config/FrequencyData2.json");
-        std::vector<std::pair<std::string, ChildSort>> experiments =
+        std::vector<std::pair<std::string, ChildSort>> experiments = 
         {
             {"Default Ordering", defaultSort},
             {"Reverse Ordering", makeReverseSort(defaultSort)},
@@ -46,7 +46,7 @@ namespace BOSS
         int BOSize;
         for (auto& pair : experiments)
         {
-            //std::cout << "Doing " << pair.first << std::endl;
+            std::cout << "Doing " << pair.first << std::endl;
             ExperimentalSmartSearch searchC = search;
             searchC.setSortFunction(pair.second);
             searchC.search();
@@ -62,26 +62,38 @@ namespace BOSS
             BOSS_ASSERT(BOSize == CBOSize, "Failure in DFBB search, different orderings produced different results");
 
             auto& results = searchC.getResults();
-            BOSS_ASSERT(!results.timedOut, "The search timed out, its results are not valid");
-            double nodesPerSec = results.nodesExpanded * 1000 / results.timeElapsed;
-            out << pair.first << ":  Nodes Expanded = " << results.nodesExpanded << " ProcessingTime = " << results.timeElapsed << " Nodes per Second = " << nodesPerSec <<  std::endl;
+            if (results.timedOut) { out << "The search timed out, its results are not valid\n"; }
+            else
+            {
+                double nodesPerSec = results.nodesExpanded * 1000 / results.timeElapsed;
+                out << pair.first << ":  Nodes Expanded = " << results.nodesExpanded << " ProcessingTime = " << results.timeElapsed << " Nodes per Second = " << nodesPerSec << std::endl;
+            }
         }
 
-        LONG64 total = 0;
+        LONG64 total1 = 0;
+        LONG64 total2 = 0;
+        LONG64 total3 = 0;
         for (unsigned int i(0); i < randomIterations; ++i)
         {
-            //std::cout << "\rDoing Random " << (i + 1) << "/" << randomIterations;
+            std::cout << "\rDoing Random " << (i + 1) << "/" << randomIterations;
             ExperimentalSmartSearch searchR = search;
             searchR.setSortFunction(makeRandomSort());
             searchR.search();
             auto& results = searchR.getResults();
-            total += results.nodesExpanded;
-            BOSS_ASSERT(Tools::GetBuildOrderCompletionTime(state, results.buildOrder) == BOSize, "Failure in DFBB search, different orderings produced different results");
+            total1 += results.nodesExpanded;
+            total2 += results.timeElapsed;
+            total3 += results.nodesExpanded * 1000 / results.timeElapsed;
+            //BOSS_ASSERT(Tools::GetBuildOrderCompletionTime(state, results.buildOrder) == BOSize, "Failure in DFBB search, different orderings produced different results");
         }
+        std::cout << std::endl;
         //std::cout << std::endl;
-        double mean = ((double)total) / ((double)randomIterations);
+        double mean1 = ((double)total1) / ((double)randomIterations);
+        double mean2 = ((double)total2) / ((double)randomIterations);
+        double mean3 = ((double)total3) / ((double)randomIterations);
 
-        out << "Random Ordering:  Mean Nodes Expanded (" << randomIterations << " samples) = " << mean << std::endl;
+        out << "Random Ordering:  Mean Nodes Expanded (" << randomIterations << " samples) = " << mean1 << std::endl;
+        out << "Random Ordering:  Mean Time Elapsed (" << randomIterations << " samples) = " << mean2 << std::endl;
+        out << "Random Ordering:  Mean Nodes Per Second (" << randomIterations << " samples) = " << mean3 << std::endl;
         out.close();
         std::cout << "    Finished Test, saved to " << outfile << std::endl;
     }

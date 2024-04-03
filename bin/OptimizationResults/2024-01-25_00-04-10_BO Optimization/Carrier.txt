@@ -1,0 +1,19 @@
+Build Order Length 7381
+Build Order: Probe Probe Probe Probe Pylon Gateway Assimilator CyberneticsCore Probe Probe Stargate Probe FleetBeacon Carrier 
+Default Ordering:  Nodes Expanded = 13169171 ProcessingTime = 126612 Nodes per Second = 104012
+Reverse Ordering:  Nodes Expanded = 5665854 ProcessingTime = 44621.4 Nodes per Second = 126976
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 12787841 ProcessingTime = 123399 Nodes per Second = 103630
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 5312549 ProcessingTime = 47653.8 Nodes per Second = 111482
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 13159677 ProcessingTime = 127176 Nodes per Second = 103476
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 12770475 ProcessingTime = 123491 Nodes per Second = 103412
+Naive Preferred Default Ordering:  Nodes Expanded = 4186619 ProcessingTime = 55010.3 Nodes per Second = 76106
+Naive Preferred F2 Ordering:  Nodes Expanded = 3548766 ProcessingTime = 46357.2 Nodes per Second = 76552.7
+Most Prerequisites Ordering:  Nodes Expanded = 4817035 ProcessingTime = 43921.5 Nodes per Second = 109674
+Least Prerequisites Ordering:  Nodes Expanded = 7064716 ProcessingTime = 57101.2 Nodes per Second = 123723
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 5879016 ProcessingTime = 46432.2 Nodes per Second = 126615
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 5502971 ProcessingTime = 50586.3 Nodes per Second = 108784
+Longest Build Time Ordering:  Nodes Expanded = 5665854 ProcessingTime = 44726.8 Nodes per Second = 126677
+Shortest Build Time Ordering:  Nodes Expanded = 13169171 ProcessingTime = 126873 Nodes per Second = 103798
+Latest Completion Time Ordering:  Nodes Expanded = 5665740 ProcessingTime = 48036.9 Nodes per Second = 117946
+Soonest Completion Time Ordering:  Nodes Expanded = 4899118 ProcessingTime = 45170.8 Nodes per Second = 108458
+Random Ordering:  Mean Nodes Expanded (50 samples) = 4.08858e+06

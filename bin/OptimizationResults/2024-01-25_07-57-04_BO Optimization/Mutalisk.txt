@@ -1,0 +1,18 @@
+Build Order Length 6391
+Build Order: Drone Drone Drone SpawningPool Extractor Drone Lair Drone Spire Mutalisk Mutalisk 
+Default Ordering:  Nodes Expanded = 408702351 ProcessingTime = 1.69001e+06 Nodes per Second = 241834
+Reverse Ordering:  Nodes Expanded = 453002282 ProcessingTime = 1.84924e+06 Nodes per Second = 244966
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 393637678 ProcessingTime = 1.66348e+06 Nodes per Second = 236634
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 184628271 ProcessingTime = 742882 Nodes per Second = 248530
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 200554073 ProcessingTime = 811400 Nodes per Second = 247170
+Frequency Ordering 4 (Above combined, F1 * log(1 / F2)):  Nodes Expanded = 396719623 ProcessingTime = 1.67793e+06 Nodes per Second = 236434
+Naive Preferred Default Ordering:  Nodes Expanded = 262446834 ProcessingTime = 2.9278e+06 Nodes per Second = 89639.7
+Naive Preferred F2 Ordering:  Nodes Expanded = 201475565 ProcessingTime = 2.1876e+06 Nodes per Second = 92099.1
+Most Prerequisites Ordering:  Nodes Expanded = 406615529 ProcessingTime = 1.69134e+06 Nodes per Second = 240411
+Least Prerequisites Ordering:  Nodes Expanded = 453435642 ProcessingTime = 1.85097e+06 Nodes per Second = 244972
+Greatest Mineral + Gas Cost Ordering:  Nodes Expanded = 470842502 ProcessingTime = 1.92732e+06 Nodes per Second = 244299
+Least Mineral + Gas Cost Ordering:  Nodes Expanded = 268810730 ProcessingTime = 1.08575e+06 Nodes per Second = 247581
+Longest Build Time Ordering:  Nodes Expanded = 455634754 ProcessingTime = 1.86381e+06 Nodes per Second = 244464
+Shortest Build Time Ordering:  Nodes Expanded = 286440695 ProcessingTime = 1.16136e+06 Nodes per Second = 246643
+Latest Completion Time Ordering:  Nodes Expanded = 455634735 ProcessingTime = 2.01201e+06 Nodes per Second = 226457
+Soonest Completion Time Ordering:  Nodes Expanded = 286617793 ProcessingTime = 1.25767e+06 Nodes per Second = 227895

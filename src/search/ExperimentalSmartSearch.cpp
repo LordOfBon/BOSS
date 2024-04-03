@@ -311,8 +311,6 @@ const DFBB_BuildOrderSearchResults & ExperimentalSmartSearch::getResults() const
 
 const DFBB_BuildOrderSearchParameters & ExperimentalSmartSearch::getParameters()
 {
-    calculateSearchSettings();
-
     m_params.m_goal = m_goal;
     m_params.m_initialState                = m_initialState;
 

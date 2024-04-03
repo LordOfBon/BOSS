@@ -57,7 +57,8 @@
             "Type"          : "BuildOrderOptimization",
             "OutputDir"     : "OptimizationResults",
             "RandomIterations" : 50,
-            "UseLandmarkBound" : true,
+            "UseLandmarkBound" : false,
+            "Parallel"      :  false,
             "Scenarios"     :   
             [ 
                 { "Name" : "Marines", "State" : "Terran Start State", "BuildOrderGoal" : "4 Marine" },
@@ -65,9 +66,11 @@
                 { "Name" : "ControlTower", "State" : "Terran Start State", "BuildOrderGoal" : "1 ControlTower" },
                 { "Name" : "Firebat", "State" : "Terran Start State", "BuildOrderGoal" : "2 Firebat" },
                 { "Name" : "Medic", "State" : "Terran Start State", "BuildOrderGoal" : "1 Medic" },
-                { "Name" : "DarkTemplars", "State" : "Protoss Start State", "BuildOrderGoal" : "2 Dark Templars"},
-                { "Name" : "ZealotDragoon", "State" : "Protoss Start State", "BuildOrderGoal" : "8 Zealots 2 Dragoons"},
-                { "Name" : "Mutalisk", "State" : "Zerg Start State", "BuildOrderGoal" : "6 Mutalisks"}
+                { "Name" : "Mutalisk", "State" : "Zerg Start State", "BuildOrderGoal" : "2 Mutalisk"},
+                { "Name" : "Hydralisk", "State" : "Zerg Start State", "BuildOrderGoal" : "4 Hydralisk"},
+                { "Name" : "Templar", "State" : "Protoss Start State", "BuildOrderGoal" : "1 High Templar"},
+                { "Name" : "Carrier", "State" : "Protoss Start State", "BuildOrderGoal" : "1 Carrier"},
+                { "Name" : "Zealot", "State" : "Protoss Start State", "BuildOrderGoal" : "4 Zealot"}
             ] 
         }
     },
@@ -110,6 +113,11 @@
         "1 Tank"                : { "race" : "Terran", "goal" : [ ["SiegeTank", 1] ], "goalMax" : [] },
         "1 ControlTower"        : { "race" : "Terran", "goal" : [ ["ControlTower", 1] ], "goalMax" : [] },
         "2 Firebat"             : { "race" : "Terran", "goal" : [ ["Firebat", 2] ], "goalMax" : [] },
-        "1 Medic"               : { "race" : "Terran", "goal" : [ ["Medic", 1] ], "goalMax" : [] }
+        "1 Medic"               : { "race" : "Terran", "goal" : [ ["Medic", 1] ], "goalMax" : [] },
+	"4 Hydralisk"           : { "race" : "Zerg", "goal" : [ ["Hydralisk", 4] ], "goalMax" : [] },
+	"2 Mutalisk"            : { "race" : "Zerg", "goal" : [ ["Mutalisk", 2] ], "goalMax" : [] },
+	"1 High Templar"        : { "race" : "Protoss", "goal" : [ ["HighTemplar", 1] ], "goalMax" : [] },
+	"1 Carrier"             : { "race" : "Protoss", "goal" : [ ["Carrier", 1] ], "goalMax" : [] },
+	"4 Zealot"              : { "race" : "Protoss", "goal" : [ ["Zealot", 4] ], "goalMax" : [] }
     }
 }

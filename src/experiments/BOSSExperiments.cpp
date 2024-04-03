@@ -100,6 +100,7 @@ void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string&
     DFBB_BuildOrderSearchParameters params;
     params.m_useLandmarkLowerBoundHeuristic = j["UseLandmarkBound"].get<bool>();
     unsigned int rIters = j["RandomIterations"].get<unsigned int>();
+    bool parallel = j["Parallel"].get<bool>();
 
     std::string outputDir(j["OutputDir"].get<std::string>());
     FileTools::MakeDirectory(outputDir);
@@ -114,7 +115,14 @@ void BOSS::Experiments::RunExperimentalBuildOrderOptimization(const std::string&
         BOSS_ASSERT(scenario.count("BuildOrderGoal") && scenario["BuildOrderGoal"].is_string(), "Scenario has no 'BuildOrderGoal' string");
         
         std::cout << "    Running Test: " << scenario["Name"] << "\n";
-        threads.push_back(std::thread(runDFBBExperiments, BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters, params));
+        if (parallel)
+        {
+            threads.push_back(std::thread(runDFBBExperiments, BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters, params));
+        }
+        else
+        {
+            runDFBBExperiments(BOSSConfig::Instance().GetState(scenario["State"]), BOSSConfig::Instance().GetBuildOrderSearchGoalMap(scenario["BuildOrderGoal"]), outputDir + "/" + scenario["Name"].get<std::string>() + ".txt", rIters, params);
+        }
     }
 
     for (auto & thread : threads)

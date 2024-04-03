@@ -1,0 +1,3 @@
+Random Ordering:  Mean Nodes Expanded (50 samples) = 3.16723e+07
+Random Ordering:  Mean Time Elapsed (50 samples) = 136858
+Random Ordering:  Mean Nodes Per Second (50 samples) = 231457

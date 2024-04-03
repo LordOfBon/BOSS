@@ -1,0 +1,2 @@
+Build Order Length 7381
+Build Order: Probe Probe Probe Probe Pylon Gateway Assimilator CyberneticsCore Probe Probe Stargate Probe FleetBeacon Carrier 

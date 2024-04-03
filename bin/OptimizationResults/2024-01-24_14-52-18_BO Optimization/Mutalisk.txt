@@ -1,0 +1,7 @@
+Build Order Length 6391
+Build Order: Drone Drone Drone SpawningPool Extractor Drone Lair Drone Spire Mutalisk Mutalisk 
+Default Ordering:  Nodes Expanded = 33876721 ProcessingTime = 8.39501e+06 Nodes per Second = 4035.34
+Reverse Ordering:  Nodes Expanded = 17705756 ProcessingTime = 3.96012e+06 Nodes per Second = 4471.02
+Frequency Ordering 1 (n / total for time slot):  Nodes Expanded = 32215192 ProcessingTime = 8.65725e+06 Nodes per Second = 3721.18
+Frequency Ordering 2 (n / total for type):  Nodes Expanded = 909905 ProcessingTime = 226339 Nodes per Second = 4020.09
+Frequency Ordering 3 (Above combined, F1 * F2):  Nodes Expanded = 3502852 ProcessingTime = 819688 Nodes per Second = 4273.4
